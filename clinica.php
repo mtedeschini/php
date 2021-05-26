@@ -6,28 +6,28 @@ $aPacientes = array();
 
 $aPacientes[] = array(
     "dni" => "33.412.523",
-    "nombre y apellido" => "Carlos Aguirre",
+    "nombre" => "Carlos Aguirre",
     "edad" => 42,
     "peso" => 50
 );
 
 $aPacientes[] = array(
     "dni" => "24.864.431",
-    "nombre y apellido" => "Estela Ibañez",
+    "nombre" => "Estela Ibañez",
     "edad" => 25,
     "peso" => 85
 );
 
 $aPacientes[] = array(
     "dni" => "96.153.244",
-    "nombre y apellido" => "Fabricio Lopez",
+    "nombre" => "Fabricio Lopez",
     "edad" => 19,
     "peso" => 90.5
 );
 
 $aPacientes[] = array(
     "dni" => "17.754.542",
-    "nombre y apellido" => "Ines Montes",
+    "nombre" => "Ines Montes",
     "edad" => 81,
     "peso" => 60
 );
@@ -52,22 +52,22 @@ $aPacientes[] = array(
                     <h1 style="text-align: center">Listado de Pacientes</h1>
                     <table class="table border table-hover">
                         <tr>
-                                <th style="text-align: center"> DNI</th>
-                                <th style="text-align: center">Nombre y Apellido</th>
-                                <th style="text-align: center"> Edad</th>
-                                <th style="text-align: center"> Peso (KG)</th>
+                                <th style="text-align: center"> DNI </th>
+                                <th style="text-align: center"> Nombre y Apellido </th>
+                                <th style="text-align: center"> Edad </th>
+                                <th style="text-align: center"> Peso (KG) </th>
                         </tr>
 
                         <?php foreach ($aPacientes as $paciente) { ?>
 
                         <tr>
                             <td style="text-align: center"> <?php echo $paciente["dni"]; ?></td>
-                            <td style="text-align: center"> <?php echo $paciente["nombre y apellido"]; ?></td>
+                            <td style="text-align: center"> <?php echo $paciente["nombre"]; ?></td>
                             <td style="text-align: center"> <?php echo $paciente["edad"]; ?></td>
                             <td style="text-align: center"> <?php echo $paciente["peso"]; ?></td>
                         </tr>
                         
-                        <?php } ?>
+                        <?php  } ?>
                     
                     </table>
                 </div>
