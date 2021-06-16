@@ -9,35 +9,32 @@ $estado="";
 $aInvitados = array("pepe", "ana", "maca", "juan");
 $aColores = array("verde");
 
-if ($_POST["boton"] == "procesarInvitado") { //"boton" es name, "procesarInvitado" es value en Button
+if (isset($_POST["boton"])) { //"boton" es name
+    $nombre = strtolower(trim($_REQUEST["nombre"]));
+    $codigo = strtolower(trim($_REQUEST["codigo"]));
 
-    $nombre = $_REQUEST["nombre"];
-    $codigo = $_REQUEST["codigo"];
-
-    if($codigo == "" && in_array($nombre, $aInvitados)){
-        $msg = " Bienvenid@ a la fiesta formidable";
-        $estado = "success";
+    if($_POST["boton"] == "procesarInvitado"){  //"boton" es name, "procesarInvitado" es value en Button
+        if($codigo == "" && in_array($nombre, $aInvitados)){
+            $msg = " Bienvenid@ a la fiesta formidable";
+            $estado = "success";
+        }
+        else{
+            $msg = "No se encuentra en la lista de invitados";
+            $estado = "danger";
+        }
     }
-    else{
-        $msg = "No se encuentra en la lista de invitados";
-        $estado = "danger";
-    }
-   
-}
-if ($_POST["boton"] == "procesarVIP") { //"boton" es name, "procesarVIP" es value en Button
-    $nombre = $_REQUEST["nombre"];
-    $codigo = $_REQUEST["codigo"];
-
-    if(in_array($codigo, $aColores)){
-        $msg2 = "Aquí tiene su pulsera";
-        $estado = "success";
-    }
-    else{
-        $msg2 = "Usted no tiene pase VIP";
-        $estado = "danger";
+    if ($_POST["boton"] == "procesarVIP") { //"boton" es name, "procesarVIP" es value en Button
+    
+        if(in_array($codigo, $aColores)){
+            $msg2 = "Aquí tiene su pulsera";
+            $estado = "success";
+        }
+        else{
+            $msg2 = "Usted no tiene pase VIP";
+            $estado = "danger";
+        }
     }
 }
-
 ?>
 
 <!DOCTYPE html>
