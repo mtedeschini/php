@@ -1,12 +1,15 @@
 <?php
-if($_POST['submit1'] != '')
-{
-echo "You hit the button 1";
+
+
+$claveEncriptada = password_hash("admin123", PASSWORD_DEFAULT);
+
+if(password_verify("admin123", $claveEncriptada)){
+    echo "la clave es correcta";
 }
-if($_POST['submit2'] != '')
-{
-echo "You hit the button 2";
-}
+else{
+    echo "la clave es incorrecta";
+};
+
 ?>
 <html>
 <head><title>Multiple Submit button Solved with PHP!</title></head>
