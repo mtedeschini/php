@@ -37,15 +37,15 @@ $aAlumnos[] = array("id" => 1, "alumno" => "Gonzalo Roldan", "nota1" => 7, "nota
                             <th>Nota 2</th>
                             <th>Promedio</th>
                         </tr>
-                            <?php 
+                    <?php 
                             $contador = 0;
                             $sumatoria = 0;
                             $pos = 0;
                             $sumPromedio = 0;
 
                             foreach($aAlumnos as $alumno){
-                            $pos = $pos + 1; 
-                            $promedio = ($alumno["nota1"] + $alumno["nota2"]) / 2;
+                                $pos = $pos + 1; 
+                                $promedio = ($alumno["nota1"] + $alumno["nota2"]) / 2;
                             $sumPromedio = $sumPromedio + $promedio;  ?>
                             <tr> 
                                 <td><?php echo $pos; ?></td>

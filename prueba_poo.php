@@ -133,5 +133,32 @@ class Auto {
 
 $objeto1 = new Auto("Ford", "Fiesta", "ABC9429");
 
+class Prefijo{
+    const BUENOS_AIRES = "011";
+    const MAR_DEL_PLATA = "011";
+    public function imprimir(){ echo self:: BUENOS_AIRES} // Así se usa dentro de la clase
+}
 
+class Persona{
+    protected $dni;
+    protected $nombre;
+    protected $edad;
+    protected $nacionalidad;
+
+    public function setNombre($nombre){ $this->nombre = $nombre;} // Getters y Setters
+    public function getNombre(){return $this->nombre;}
+
+    public function setDni($dni){$this->dni = $dni;}
+    public function getDni(){return $this->dni;}
+
+    public function setEdad($edad){$this->edad = $edad;}
+    public function getEdad(){return $this->edad;}
+
+    public function setNacionalidad($nacionalidad){$this->nacionalidad = $nacionalidad;}
+    public function getNacionalidad(){return $this->nacionalidad;}
+
+    public function imprimir(){
+        echo "Es una persona"; 
+    }
+}
 ?>
