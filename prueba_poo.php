@@ -18,7 +18,7 @@ class Producto{
     public $pulgadas;
     public function imprimirHojaTecnica(){
 
-    };
+    }
 }
 
 class Persona{
@@ -30,7 +30,6 @@ class Persona{
     public function __construct($nombrePersona){
         $this->nombre = $nombrePersona;
     }
-
 }
 
 class Alumno extends Persona {

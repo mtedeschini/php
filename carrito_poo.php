@@ -59,7 +59,6 @@ class Producto{
     }
 }
 
-
 class Carrito{
     private $cliente; //Objeto
     private $aProductos; //Array de objetos
@@ -98,7 +97,7 @@ class Carrito{
         <tr>
             <th colspan="2"> Productos: </th>
         </tr>';
-    foreach($this->aProductos as $producto){ //Recorre el array con todos los productos
+        foreach($this->aProductos as $producto){ //Recorre el array con todos los productos
         echo '
         <tr>
             <td>' . $producto->nombre . '</td>
@@ -110,23 +109,20 @@ class Carrito{
             <th> Subtotal s/IVA: </th>
             <td> $'; 
 
-            $sumatoria = 0; 
+            $subtotal = 0;
+            $total = 0; 
             foreach($this->aProductos as $producto){ //Recorre el array con todos los productos
-                $sumatoria = ($sumatoria + $producto->precio); }
-            echo (number_format(($sumatoria), 2, ",", ".")) .'
-            </td>
+                $this->subtotal += $producto->precio;
+                $this->total += ($producto->precio * ($producto->iva/100+1));}
+            echo (number_format(($this->subtotal), 2, ",", ".")) .
+            '</td>
         </tr>
         <tr>
             <th> TOTAL </th>
-            <td> $';
-            
-            $precioConIva = 0; 
-            foreach($this->aProductos as $producto){ //Recorre el array con todos los productos
-                $precioConIva = $precioConIva + ($producto->precio * ($producto->iva/100+1)); }
-            echo (number_format(($precioConIva), 2, ",", "."))
+            <td> $';        
+            echo (number_format(($this->total), 2, ",", "."))
             . '</td>
-        </tr>';
-                
+        </tr>';        
     }
 
     public function __get($propiedad) {
@@ -136,9 +132,6 @@ class Carrito{
     public function __set($propiedad, $valor) {
         $this->$propiedad = $valor;
     }
-
-
-
 }
 
 //Programa
