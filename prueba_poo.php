@@ -30,6 +30,7 @@ class Persona{
     public function __construct($nombrePersona){
         $this->nombre = $nombrePersona;
     }
+
 }
 
 class Alumno extends Persona {
@@ -160,4 +161,16 @@ class Persona{
         echo "Es una persona"; 
     }
 }
+
+class Persona{
+    protected $nombre;
+    public function__construct($nombre){
+        $this->nombre = $nombre;
+    }
+}
+
+class Usuario{
+    :
+}
+
 ?>
