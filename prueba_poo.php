@@ -172,5 +172,43 @@ class Persona{
 class Usuario{
     :
 }
+abstract class Fruta{
+    abstract function comer();
+}
 
+class Manzana extends Fruta{
+    public function comer(){
+        //Masticar
+    }
+}
+class Naranja extends Fruta{
+    public function comer(){
+        //Pelar
+    }
+}
+
+if($manzana instanceof Fruta){ 
+    //Manzana es una clase fruta?
+    echo "La manzana es una fruta"
+}
+
+class Calculadora(){
+    public static function sumar($num1, $num2){
+        return $num1+$num2;
+    }
+}
+Calculadora::sumar(2,5);
+
+
+class Colectivo{
+    public static $aPrecios = array(10, 21, 32);
+    public static function getPrecio($distancia){
+        if($distancia<10){
+            return self::$aPrecios[0];
+        }
+        return self::$aPrecios[1];
+    }
+}
+
+Colectivo::getPrecio(21);
 ?>

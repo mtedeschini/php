@@ -5,7 +5,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 //Definición de Clases
-class Persona{
+abstract class Persona{
     protected $dni;
     protected $nombre;
     protected $edad;
@@ -23,9 +23,7 @@ class Persona{
     public function setNacionalidad($nacionalidad){$this->nacionalidad = $nacionalidad;}
     public function getNacionalidad(){return $this->nacionalidad;}
 
-    public function imprimir(){
-        echo "Es una persona"; 
-    }
+    abstract public function imprimir(); //Si es abstract no hay que poner nada dentro, SIN LLAVES
 }
 
 class Alumno extends Persona{
@@ -97,5 +95,3 @@ $docente->setNombre("Miguel Paz");
 $docente->setDni("42342354");
 $docente->setEspecialidad(Docente::ESPECIALIDAD_BBDD);
 $docente->imprimir();
-
-?>
