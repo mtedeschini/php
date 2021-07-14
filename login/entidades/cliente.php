@@ -83,8 +83,8 @@ class Cliente
 
         $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE);
         $sql = "UPDATE clientes SET
-                nombre = '" . $this->nombre . "',
-                cuit = '" . $this->cuit . "',
+                nombre = '$this->nombre',
+                cuit = '$this->cuit',
                 telefono = '" . $this->telefono . "',
                 correo = '" . $this->correo . "',
                 fecha_nac =  '" . $this->fecha_nac . "',
