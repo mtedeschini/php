@@ -21,25 +21,25 @@ include_once("header.php");
           <table class="table table-hover border">
             <tr>
                 <th>ID Producto</th>
-                <th>Tipo de Producto</th>
+                <th>Foto</th>
                 <th>Nombre</th>
+                <th>Tipo de Producto</th>
                 <th>Cantidad</th>
                 <th>Precio</th>
                 <th>Descripción</th>
-                <th>Imagen</th>
                 <th>Acciones</th>
             </tr>
             <?php foreach ($aProductos as $producto): ?>
               <tr>
                   <td><?php echo $producto->idproducto; ?></td>
-                  <td><?php echo $producto->fk_idtipoproducto; ?></td>
+                  <td><?php echo "<img class='img-thumbnail' style='height: 20px; width:20px' src='' "?></td>
                   <td><?php echo $producto->nombre; ?></td>
+                  <td><?php echo $producto->fk_idtipoproducto; ?></td>
                   <td><?php echo $producto->cantidad; ?></td>
-                  <td><?php echo $producto->precio; ?></td>
+                  <td>$<?php echo number_format($producto->precio, 2 , "," , "." ); ?></td>                  
                   <td><?php echo $producto->descripcion; ?></td>
-                  <td><?php echo $producto->imagen; ?></td>
                   <td style="width: 110px;">
-                      <a href="producto-formulario.php?id=<?php echo $producto->idproducto; ?>"><i class="fas fa-search"></i></a>   
+                      <a href="tipoproducto-formulario.php?id=<?php echo $producto->idproducto; ?>"><i class="fas fa-search"></i></a>   
                   </td>
               </tr>
             <?php endforeach; ?>
