@@ -1,13 +1,14 @@
 <?php
 
-include_once "config.php";
-include_once "entidades/venta.php";
+include_once("config.php");
+include_once("entidades/venta.php");
 $pg = "Listado de Ventas";
 
 $venta = new Venta();
 $aVentas = $venta->obtenerTodos();
 
 include_once("header.php");
+
 ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -31,10 +32,10 @@ include_once("header.php");
         <?php foreach ($aVentas as $venta) : ?>
             <tr>
                 <td><?php echo $venta->idventa; ?></td>
-                <td><?php echo $venta->fk_idcliente; ?></td>
-                <td><?php echo $venta->fk_idproducto; ?></td>
                 <td><?php echo $venta->fecha; ?></td>
                 <td><?php echo $venta->cantidad; ?></td>
+                <td><?php echo $venta->fk_idproducto; ?></td>
+                <td><?php echo $venta->fk_idcliente; ?></td>
                 <td>$<?php echo number_format($venta->preciounitario, 2 , "," , "." ); ?></td>
                 <td>$<?php echo number_format($venta->total, 2 , "," , "." ); ?></td>
                 <td style="width: 110px;">

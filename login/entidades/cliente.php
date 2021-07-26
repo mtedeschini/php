@@ -46,7 +46,7 @@ class Cliente
     public function insertar()
     {
         //Instancia la clase mysqli con el constructor parametrizado
-        $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE);
+        $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT);
         //Arma la query
         $sql = "INSERT INTO clientes (
                     nombre,
@@ -81,10 +81,10 @@ class Cliente
     public function actualizar()
     {
 
-        $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE);
+        $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT);
         $sql = "UPDATE clientes SET
-                nombre = '$this->nombre',
-                cuit = '$this->cuit',
+                nombre = '" . $this->nombre . "',
+                cuit = '" . $this->cuit . "',
                 telefono = '" . $this->telefono . "',
                 correo = '" . $this->correo . "',
                 fecha_nac =  '" . $this->fecha_nac . "',
@@ -101,7 +101,7 @@ class Cliente
 
     public function eliminar()
     {
-        $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE);
+        $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT);
         $sql = "DELETE FROM clientes WHERE idcliente = " . $this->idcliente;
         //Ejecuta la query
         if (!$mysqli->query($sql)) {
@@ -112,7 +112,7 @@ class Cliente
 
     public function obtenerPorId()
     {
-        $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE);
+        $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT);
         $sql = "SELECT idcliente,
                         nombre,
                         cuit,
@@ -144,10 +144,9 @@ class Cliente
 
     }
 
-    public function obtenerTodos()
-    {
-        $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE);
-        $sql = "SELECT
+     public function obtenerTodos(){
+        $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT);
+        $sql = "SELECT 
                     idcliente,
                     nombre,
                     cuit,
@@ -163,10 +162,10 @@ class Cliente
         }
 
         $aResultado = array();
-        if ($resultado) {
+        if($resultado){
             //Convierte el resultado en un array asociativo
 
-            while ($fila = $resultado->fetch_assoc()) {
+            while($fila = $resultado->fetch_assoc()){
                 $entidadAux = new Cliente();
                 $entidadAux->idcliente = $fila["idcliente"];
                 $entidadAux->nombre = $fila["nombre"];
@@ -184,3 +183,5 @@ class Cliente
     }
 
 }
+
+?>

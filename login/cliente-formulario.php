@@ -6,15 +6,11 @@ include_once "entidades/cliente.php";
 include_once "entidades/provincia.php";
 include_once "entidades/localidad.php";
 
-$pg = "Edición de cliente";
-
 $cliente = new Cliente();
 $cliente->cargarFormulario($_REQUEST);
 
-
 if($_POST){
-
-    if(isset($_POST["btnGuardar"])){
+    if(isset($_POST["btnGuardar"])){ //Se apretó boton GUARDAR
         if(isset($_GET["id"]) && $_GET["id"] > 0){
               //Actualizo un cliente existente
               $cliente->actualizar();
@@ -23,7 +19,7 @@ if($_POST){
             $cliente->insertar();
         }
 
-    } else if(isset($_POST["btnBorrar"])){
+    } else if(isset($_POST["btnBorrar"])){ //Se apretó boton BORRAR
         $cliente->eliminar();
         header("Location: clientes.php");
     }
@@ -35,15 +31,14 @@ if(isset($_GET["do"]) && $_GET["do"] == "buscarLocalidad" && $_GET["id"] && $_GE
     $aLocalidad = $localidad->obtenerPorProvincia($idProvincia);
     echo json_encode($aLocalidad);
     exit;
-} else if(isset($_GET["id"]) && $_GET["id"] > 0){
+} 
+else if(isset($_GET["id"]) && $_GET["id"] > 0){ //Si hay querystring con el ID, se ejecuta "obtener por id"
     $cliente->obtenerPorId();
+
 }
-
-
 
 $provincia = new Provincia();
 $aProvincias = $provincia->obtenerTodos();
-
 
 include_once("header.php"); 
 ?>
@@ -92,7 +87,7 @@ include_once("header.php");
                     <select class="form-control d-inline"  name="txtMesNac" id="txtMesNac" style="width: 80px">
                         <option selected="" disabled="">MM</option>
                         <?php for($i=1; $i <= 12; $i++): ?>
-                            <?php if($cliente->fecha_nac != "" && $i == date_format(date_create($cliente->fecha_nac), "m")): ?>
+                            <?php if($cliente->fecha_nac != "" && $i == date_format(date_create($cliente->fecha_nac), "m")): ?> <!-- Si el mes es igual al mes del cliente, que quede "selected" -->
                             <option selected><?php echo $i; ?></option>
                             <?php else: ?>
                             <option><?php echo $i; ?></option>
@@ -111,63 +106,42 @@ include_once("header.php");
                     </select>
                 </div>
             </div>
+            <div class="row">
+            <div class="col-12">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fa fa-table"></i> Domicilios
+                    </div>
+                    <div class="row panel-body p-3">
+                        <div class="col-6 form-group">
+                            <label for="txtTelefono">Provincia:</label>
+                            <select class="form-control" name="lstProvincia" id="lstProvincia">
+                            <option value="" disabled selected>Seleccionar</option>
+                                <?php foreach($aProvincias as $provincia): ?>
+                                    <?php if($cliente->fk_idprovincia == $provincia->idprovincia): ?>
+                                        <option selected value="<?php echo $provincia->idprovincia; ?>"><?php echo $provincia->nombre; ?></option>
+                                    <?php else: ?>
+                                        <option value="<?php echo $provincia->idprovincia; ?>"><?php echo $provincia->nombre; ?></option>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>                            
+                            </select>
+                        </div>
+                        <div class="col-6 form-group">
+                            <label for="txtTelefono">Localidad:</label>
+                            <select class="form-control" name="lstLocalidad" id="lstLocalidad">
+                                <option value="" disabled selected>Seleccionar</option>
+                                <option value="1">CABA</option>
+                            </select>
+                        </div>
+                        <div class="col-12 form-group">
+                            <label for="txtTelefono">Dirección:</label>
+                            <input type="text" class="form-control" name="txtDomicilio" id="txtDomicilio" value="<?php echo $cliente->domicilio ?>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
 
-
-
-<div class="modal fade" id="modalDomicilio" tabindex="-1" role="dialog" aria-labelledby="modalDomicilioLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalDomicilioLabel">Domicilio</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <div class="row">
-            <div class="col-12 form-group">
-                <label for="lstTipo">Tipo:</label>
-                <select name="lstTipo" id="lstTipo" class="form-control">
-                    <option value="" disabled selected>Seleccionar</option>
-                    <option value="1">Personal</option>
-                    <option value="2">Laboral</option>
-                    <option value="3">Comercial</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 form-group">
-                <label for="lstProvincia">Provincia:</label>
-                <select name="lstProvincia" id="lstProvincia" onchange="fBuscarLocalidad();" class="form-control">
-                    <option value="" disabled selected>Seleccionar</option>
-                    <?php foreach($aProvincias as $prov): ?>
-                        <option value="<?php echo $prov->idprovincia; ?>"><?php echo $prov->nombre; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 form-group">
-                <label for="lstLocalidad">Localidad:</label>
-                <select name="lstLocalidad" id="lstLocalidad" class="form-control">
-                    <option value="" disabled selected>Seleccionar</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 form-group">
-                <label for="txtDireccion">Dirección:</label>
-                <input type="text" name="" id="txtDireccion" class="form-control">
-            </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" onclick="fAgregarDomicilio()">Agregar</button>
-      </div>
-    </div>
-  </div>
-</div>
         </div>
         <!-- /.container-fluid -->
 
@@ -177,17 +151,6 @@ include_once("header.php");
 $(document).ready( function () {
     var idCliente = '<?php echo isset($cliente) && $cliente->idcliente > 0? $cliente->idcliente : 0 ?>';
 
-   var dataTable = $('#grilla').DataTable({
-        "processing": true,
-        "serverSide": false,
-        "bFilter": false,
-        "bInfo": true,
-        "bSearchable": false,
-        "paging": false,
-        "pageLength": 25,
-        "order": [[ 0, "asc" ]],
-        "ajax": "cliente-formulario.php?do=cargarGrilla&idCliente=" + idCliente
-    });
 } );
 
  function fBuscarLocalidad(){
@@ -209,23 +172,5 @@ $(document).ready( function () {
             });
         }
 
-        function fAgregarDomicilio(){
-            var grilla = $('#grilla').DataTable();
-            grilla.row.add([
-                $("#lstTipo option:selected").text() + "<input type='hidden' name='txtTipo[]' value='"+ $("#lstTipo option:selected").val() +"'>",
-                $("#lstProvincia option:selected").text() + "<input type='hidden' name='txtProvincia[]' value='"+ $("#lstProvincia option:selected").val() +"'>",
-                $("#lstLocalidad option:selected").text() + "<input type='hidden' name='txtLocalidad[]' value='"+ $("#lstLocalidad option:selected").val() +"'>",
-                $("#txtDireccion").val() + "<input type='hidden' name='txtDomicilio[]' value='"+$("#txtDireccion").val()+"'>"
-            ]).draw();
-            $('#modalDomicilio').modal('toggle');
-            limpiarFormulario();
-        }
-
-        function limpiarFormulario(){
-            $("#lstTipo").val("");
-            $("#lstProvincia").val("");
-            $("#lstLocalidad").val("");
-            $("#txtDireccion").val("");
-        }
 </script>
 <?php include_once("footer.php"); ?>
