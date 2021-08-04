@@ -14,10 +14,13 @@ if($_POST){
         if(isset($_GET["id"]) && $_GET["id"] > 0){
               //Actualizo un cliente existente
               $cliente->actualizar();
+
         } else {
             //Es nuevo
             $cliente->insertar();
         }
+        $msg["texto"] = "Guardado correctamente";
+        $msg["codigo"] = "alert-success";
 
     } else if(isset($_POST["btnBorrar"])){ //Se apretó boton BORRAR
         $cliente->eliminar();
@@ -54,6 +57,13 @@ include_once("header.php");
                     <button type="submit" class="btn btn-success mr-2" id="btnGuardar" name="btnGuardar">Guardar</button>
                     <button type="submit" class="btn btn-danger" id="btnBorrar" name="btnBorrar">Borrar</button>
                 </div>
+            </div>
+            <div class="row">
+                <?php
+                if(isset($msg)){ ?>
+                    <div class="col-12 alert <?php echo $msg["codigo"]; ?>" role="alert">
+                    <?php echo $msg["texto"]; ?>
+                    </div> <?php } ?>
             </div>
             <div class="row">
                 <div class="col-6 form-group">

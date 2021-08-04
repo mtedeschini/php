@@ -5,7 +5,8 @@ include_once("entidades/producto.php");
 $pg = "Listado de Productos";
 
 $producto = new Producto();
-$aProductos = $producto->obtenerTodos();
+$aProductos = $producto->cargarGrilla();
+
 
 include_once("header.php");
 ?>
@@ -34,7 +35,7 @@ include_once("header.php");
           <td><?php echo $producto->idproducto; ?></td>
           <td><?php echo "<img class='img-thumbnail' style='height: 20px; width:20px' src='' " ?></td>
           <td><?php echo $producto->nombre; ?></td>
-          <td><?php echo $producto->fk_idtipoproducto; ?></td>
+          <td><?php echo $producto->tipo_producto; ?></td>
           <td><?php echo $producto->cantidad; ?></td>
           <td>$<?php echo number_format($producto->precio, 2, ",", "."); ?></td>
           <td><?php echo $producto->descripcion; ?></td>
