@@ -123,7 +123,7 @@ include_once("header.php");
                         <i class="fa fa-table"></i> Domicilios
                     </div>
                     <div class="row panel-body p-3">
-                        <div class="col-6 form-group">
+                        <div class="col-4 form-group">
                             <label for="txtTelefono">Provincia:</label>
                             <select class="form-control" name="lstProvincia" id="lstProvincia">
                             <option value="" disabled selected>Seleccionar</option>
@@ -136,6 +136,7 @@ include_once("header.php");
                                 <?php endforeach; ?>                            
                             </select>
                         </div>
+                        <div class="btn button col-2"></div>
                         <div class="col-6 form-group">
                             <label for="txtTelefono">Localidad:</label>
                             <select class="form-control" name="lstLocalidad" id="lstLocalidad">

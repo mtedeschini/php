@@ -81,7 +81,33 @@ public function obtenerPorId(){
         }
     $mysqli->close(); //Cierro conexión con la BBDD
     }
-    
+
+    public function obtenerPorUsuario($user){ 
+
+    $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE); //Abro conexión con BBDD
+    $sql = "SELECT
+                idusuario,
+                usuario,
+                clave,
+                nombre,
+                apellido,
+                correo
+            FROM usuarios
+            WHERE usuario = '$user'";
+    if (!$resultado = $mysqli->query($sql)) {
+        printf("Error en query: %s\n", $mysqli->error . " " . $sql);
+    }
+    if($fila = $resultado->fetch_assoc()) {
+            $this->idusuario = $fila["idusuario"];
+            $this->usuario = $fila["usuario"];
+            $this->clave = $fila["clave"];
+            $this->nombre = $fila["nombre"];
+            $this->apellido = $fila["apellido"];
+            $this->correo = $fila["correo"];
+        }
+    $mysqli->close(); //Cierro conexión con la BBDD
+    }
+
     public function eliminar(){
         
         $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE);

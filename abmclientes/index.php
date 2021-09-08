@@ -149,8 +149,8 @@ if($id != "" && isset($_REQUEST["do"]) && $_REQUEST["do"] == "eliminar"){// Lee 
                                         <td><?php echo $cliente["nombre"]; ?></td> 
                                         <td><?php echo $cliente["telefono"]; ?></td> 
                                         <td><?php echo $cliente["correo"]; ?></td> 
-                                        <td style="width: 110px;">
-                                        <a href="index.php?id=<?php echo $pos; ?>"><i class="fas fa-edit"></i></a>
+                                        <td style="width: 110px;"> <a> Hola </a>
+                                        <a href="index.php?id=<?php echo $pos; ?>"></i></a>
                                         <a href="index.php?id=<?php echo $pos; ?>&do=eliminar"><i class="fas fa-trash-alt"></i></a>
                                         </td>
                                     </tr>

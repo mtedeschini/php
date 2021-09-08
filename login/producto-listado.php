@@ -33,7 +33,7 @@ include_once("header.php");
     <?php foreach ($aProductos as $producto) : ?>
         <tr>
           <td><?php echo $producto->idproducto; ?></td>
-          <td><?php echo "<img class='img-thumbnail' style='height: 20px; width:20px' src='' " ?></td>
+          <td><?php echo "<img class='img-thumbnail' src='files/$producto->imagen' " ?></td>
           <td><?php echo $producto->nombre; ?></td>
           <td><?php echo $producto->tipo_producto; ?></td>
           <td><?php echo $producto->cantidad; ?></td>

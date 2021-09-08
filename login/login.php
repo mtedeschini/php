@@ -3,22 +3,26 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-session_start();
+include_once("config.php");
+include_once("entidades/usuario.php");
+
 
 $claveEncriptada = password_hash("admin123", PASSWORD_DEFAULT);
 
-if($_POST){ // Si es post, entonces: 
+
+if ($_POST) { // Si es post, entonces: 
   $usuario = $_POST["txtUsuario"];
   $clave = $_POST["txtClave"];
 
-  if($usuario == "admin" && password_verify($clave, $claveEncriptada)){ 
-      $_SESSION["nombre"] = "Matias"; // Creamos sesión con el nombre
-      header("Location: index.php");
-  }
-  else{
-    $msg="Usuario o Clave incorrecto";
-  }
+  $entidadUsuario = new Usuario();
+  $entidadUsuario->obtenerPorUsuario($usuario);
 
+  if ($entidadUsuario->verificarClave($clave, $entidadUsuario->clave)) {
+    $_SESSION["nombre"] = $entidadUsuario->nombre; // Creamos sesión con el nombre
+    header("Location: index.php");
+  } else {
+    $msg = "Usuario o Clave incorrecto";
+  }
 }
 
 ?>
@@ -65,16 +69,16 @@ if($_POST){ // Si es post, entonces:
                     <h1 class="h4 text-gray-900 mb-4">Bienvenido</h1>
                   </div>
                   <form action="" method="POST" class="user">
-				  <?php if(isset($msg)): ?>
-				  	<div class="alert alert-danger" role="alert">
-						<?php echo $msg; ?>
-					</div>
-				  <?php endif; ?>
+                    <?php if (isset($msg)) : ?>
+                      <div class="alert alert-danger" role="alert">
+                        <?php echo $msg; ?>
+                      </div>
+                    <?php endif; ?>
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="txtUsuario" name="txtUsuario" aria-describedby="emailHelp" placeholder="Usuario" value="">
+                      <input type="text" class="form-control form-control-user" id="txtUsuario" name="txtUsuario" aria-describedby="emailHelp" placeholder="Usuario" value="mtedeschini">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="txtClave" name="txtClave" placeholder="Clave" value="">
+                      <input type="password" class="form-control form-control-user" id="txtClave" name="txtClave" placeholder="Clave" value="1234">
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
