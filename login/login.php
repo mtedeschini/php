@@ -6,10 +6,6 @@ error_reporting(E_ALL);
 include_once("config.php");
 include_once("entidades/usuario.php");
 
-
-$claveEncriptada = password_hash("admin123", PASSWORD_DEFAULT);
-
-
 if ($_POST) { // Si es post, entonces: 
   $usuario = $_POST["txtUsuario"];
   $clave = $_POST["txtClave"];
@@ -91,11 +87,9 @@ if ($_POST) { // Si es post, entonces:
                     </button>
                   </form>
                   <hr>
+
                   <div class="text-center">
-                    <a class="small" href="forgot-password.html">Olvidaste la clave?</a>
-                  </div>
-                  <div class="text-center">
-                    <a class="small" href="register.html">Crear una cuenta!</a>
+                    <a class="small" href="register.php">Crear una cuenta</a>
                   </div>
                 </div>
               </div>

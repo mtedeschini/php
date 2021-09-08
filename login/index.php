@@ -6,6 +6,7 @@ include_once("entidades/venta.php");
 $venta = new Venta();
 $facturacionMensual = $venta->obtenerFacturacionMensual(date('m'));
 $facturacionAnual = $venta->obtenerFacturacionAnual(date('Y'));
+
 ?>
 
         <!-- Begin Page Content -->
@@ -135,3 +136,6 @@ $facturacionAnual = $venta->obtenerFacturacionAnual(date('Y'));
       </div>
       <!-- End of Main Content -->
 <?php include_once("footer.php"); ?>
+
+
+

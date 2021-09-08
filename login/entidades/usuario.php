@@ -21,6 +21,7 @@ class Usuario {
         return $this;
     }
 
+ 
 public function obtenerTodos(){ 
 
     $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE); //Abro conexión con BBDD

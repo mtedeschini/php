@@ -1,3 +1,13 @@
+<?php
+if($_POST){
+    if(isset($_POST["btnCerrar"])){ //Se apretó boton GUARDAR
+      session_destroy();
+      header("Location: login.php ");
+
+  }
+}
+?>
+
 <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
